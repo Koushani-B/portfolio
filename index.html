@@ -1,0 +1,677 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Koushani Biswas — Neuroscientist</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300..600;1,6..72,300..500&family=Spectral:ital,wght@0,300;0,400;0,500;0,600;1,400&family=Public+Sans:ital,wght@0,300..700;1,400&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --paper: #4a0214;       /* deep oxblood ground */
+    --surface: #5e1322;     /* lifted maroon card */
+    --blue:  #b3ced6;       /* pale blue (text + frame pop) */
+    --rose:  #ae5264;       /* dusty rose accent (fills) */
+    --ink: #b3ced6;         /* pale blue letters */
+    --ink-soft: #93acb3;
+    --ink-faint: #6f868d;
+    --line: rgba(179, 206, 214, 0.16);
+    --accent: #ae5264;      /* rose accent for fills */
+    --accent-text: #d98a99; /* lightened rose for legible accent text */
+    --heading-font: 'Newsreader', Georgia, serif;
+    --body-font: 'Public Sans', system-ui, sans-serif;
+    --max: 1080px;
+  }
+
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    background: var(--paper);
+    color: var(--ink);
+    font-family: var(--body-font);
+    font-size: 18px;
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+  ::selection { background: color-mix(in oklab, var(--accent) 22%, transparent); }
+
+  a { color: inherit; }
+
+  .wrap { max-width: var(--max); margin: 0 auto; padding: 0 40px; }
+
+  /* ---------- Nav ---------- */
+  .nav {
+    position: sticky; top: 0; z-index: 50;
+    background: color-mix(in oklab, var(--paper) 86%, transparent);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--line);
+  }
+  .nav-inner {
+    display: flex; align-items: baseline; justify-content: space-between;
+    max-width: var(--max); margin: 0 auto; padding: 16px 40px;
+  }
+  .nav-brand {
+    font-family: var(--heading-font);
+    font-size: 1.15rem; font-weight: 500; letter-spacing: -0.01em;
+    text-decoration: none; white-space: nowrap;
+  }
+  .nav-brand .dot { color: var(--accent-text); }
+  .nav-links { display: flex; gap: 28px; align-items: baseline; }
+  .nav-links a {
+    text-decoration: none; color: var(--ink-soft);
+    font-size: 0.84rem; letter-spacing: 0.02em;
+    text-transform: uppercase; font-weight: 500;
+    position: relative; padding-bottom: 2px;
+    transition: color 0.2s;
+  }
+  .nav-links a::after {
+    content: ''; position: absolute; left: 0; bottom: -2px;
+    width: 0; height: 1.5px; background: var(--accent);
+    transition: width 0.25s ease;
+  }
+  .nav-links a:hover, .nav-links a.active { color: var(--ink); }
+  .nav-links a.active::after, .nav-links a:hover::after { width: 100%; }
+  @media (max-width: 820px) { .nav-links { display: none; } }
+
+  /* ---------- Section primitives ---------- */
+  section { padding: 92px 0; border-top: 1px solid var(--line); }
+  section:first-of-type { border-top: none; }
+  .eyebrow {
+    font-size: 0.72rem; letter-spacing: 0.18em; text-transform: uppercase;
+    color: var(--accent-text); font-weight: 600; margin: 0 0 18px;
+    display: flex; align-items: center; gap: 12px;
+  }
+  .eyebrow::before {
+    content: ''; width: 26px; height: 1.5px; background: var(--accent-text);
+  }
+  h2.section-title {
+    font-family: var(--heading-font); font-weight: 400;
+    font-size: clamp(1.9rem, 3.4vw, 2.6rem); line-height: 1.1;
+    letter-spacing: -0.015em; margin: 0 0 8px;
+  }
+
+  /* ---------- Hero ---------- */
+  .hero { padding: 86px 0 96px; border-top: none; }
+  .hero-grid {
+    display: grid; grid-template-columns: 1.5fr 1fr; gap: 64px; align-items: center;
+  }
+  .hero h1 {
+    font-family: var(--heading-font); font-weight: 400;
+    font-size: clamp(2.8rem, 6vw, 4.6rem); line-height: 1.02;
+    letter-spacing: -0.025em; margin: 0 0 18px;
+  }
+  .hero .role {
+    font-size: 1.05rem; color: var(--accent-text); font-weight: 600;
+    letter-spacing: 0.01em; margin: 0 0 24px;
+    display: flex; flex-wrap: wrap; gap: 8px 14px; align-items: center;
+  }
+  .hero .role .sep { color: var(--ink-faint); font-weight: 400; }
+  .hero .lede {
+    font-size: 1.18rem; color: var(--ink-soft); max-width: 46ch;
+    margin: 0 0 32px; text-wrap: pretty;
+  }
+  .hero-actions { display: flex; flex-wrap: wrap; gap: 14px; align-items: center; }
+  .btn {
+    display: inline-flex; align-items: center; gap: 9px;
+    font-size: 0.92rem; font-weight: 600; letter-spacing: 0.01em;
+    padding: 12px 22px; border-radius: 2px; text-decoration: none;
+    border: 1px solid var(--accent); transition: all 0.2s;
+  }
+  .btn-primary { background: var(--accent); color: #fff; }
+  .btn-primary:hover { background: transparent; color: var(--accent-text); border-color: var(--accent-text); }
+  .btn-ghost { background: transparent; color: var(--ink); border-color: var(--line); }
+  .btn-ghost:hover { border-color: var(--ink); }
+
+  .hero-photo { position: relative; justify-self: center; }
+  .hero-photo image-slot {
+    width: 300px; height: 372px; display: block;
+    box-shadow: 0 1px 0 var(--line), 18px 18px 0 -2px var(--blue);
+  }
+  .hero-photo .headshot-img {
+    width: 300px; height: 372px; display: block;
+    object-fit: cover; object-position: center top;
+    box-shadow: 0 1px 0 var(--line), 18px 18px 0 -2px var(--blue);
+  }
+  .photo-cap {
+    font-family: 'Public Sans', monospace; font-size: 0.7rem;
+    letter-spacing: 0.04em; color: var(--ink-faint);
+    text-align: center; margin-top: 14px; text-transform: uppercase;
+  }
+
+  .socials { display: flex; gap: 18px; margin-top: 30px; align-items: center; }
+  .socials a {
+    font-size: 0.82rem; text-decoration: none; color: var(--ink-soft);
+    letter-spacing: 0.02em; font-weight: 500; transition: color 0.2s;
+    border-bottom: 1px solid transparent; padding-bottom: 1px;
+  }
+  .socials a:hover { color: var(--accent-text); border-color: var(--accent-text); }
+
+  /* ---------- About ---------- */
+  .about-grid { display: grid; grid-template-columns: 0.8fr 1.2fr; gap: 56px; }
+  .about-grid .lead-label {
+    font-family: var(--heading-font); font-style: italic;
+    font-size: 1.5rem; color: var(--accent-text); line-height: 1.3;
+  }
+  .about-body p { margin: 0 0 18px; color: var(--ink-soft); max-width: 60ch; }
+  .about-body p strong { color: var(--ink); font-weight: 600; }
+  .about-meta {
+    margin-top: 28px; display: flex; flex-wrap: wrap; gap: 14px 36px;
+    padding-top: 24px; border-top: 1px solid var(--line);
+  }
+  .about-meta div .k { font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--ink-faint); }
+  .about-meta div .v { font-size: 0.96rem; color: var(--ink); margin-top: 3px; }
+  .lead-label { font-family: var(--heading-font); font-style: italic; font-size: 1.6rem; color: var(--accent-text); line-height: 1.3; max-width: 26ch; margin: 0 0 40px; }
+  .about-themes { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-bottom: 36px; }
+  .theme-card { background: var(--surface); border: 1px solid var(--line); border-top: 3px solid var(--accent); padding: 34px 32px; }
+  .theme-card:nth-child(2) { border-top-color: var(--blue); }
+  .theme-num { font-size: 0.72rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--accent-text); font-weight: 600; }
+  .theme-card:nth-child(2) .theme-num { color: var(--ink); }
+  .theme-title { font-family: var(--heading-font); font-weight: 500; font-size: 1.5rem; line-height: 1.2; letter-spacing: -0.01em; margin: 13px 0 14px; }
+  .theme-card p { margin: 0; color: var(--ink-soft); font-size: 1rem; line-height: 1.62; }
+  @media (max-width: 720px) { .about-themes { grid-template-columns: 1fr; } }
+
+  /* ---------- Research ---------- */
+  .research-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; background: var(--line); border: 1px solid var(--line); }
+  .research-card { background: var(--paper); padding: 32px 28px; transition: background 0.25s; }
+  .research-card:hover { background: color-mix(in oklab, var(--accent) 5%, var(--paper)); }
+  .research-card .num {
+    font-family: var(--heading-font); font-size: 0.95rem; color: var(--accent);
+    font-weight: 500; margin-bottom: 16px;
+  }
+  .research-card h3 {
+    font-family: var(--heading-font); font-weight: 500; font-size: 1.3rem;
+    line-height: 1.2; margin: 0 0 12px; letter-spacing: -0.01em;
+  }
+  .research-card p { margin: 0; font-size: 0.95rem; color: var(--ink-soft); line-height: 1.55; }
+  @media (max-width: 820px) { .research-grid { grid-template-columns: 1fr; } }
+
+  /* ---------- Publications ---------- */
+  .pub { display: grid; grid-template-columns: 88px 1fr auto; gap: 24px;
+    padding: 26px 0; border-top: 1px solid var(--line); align-items: start; }
+  .pub:last-child { border-bottom: 1px solid var(--line); }
+  .pub .year { font-family: var(--heading-font); font-size: 1.1rem; color: var(--ink-faint); padding-top: 1px; }
+  .pub .body .title {
+    font-family: var(--heading-font); font-size: 1.28rem; font-weight: 500;
+    line-height: 1.3; letter-spacing: -0.01em; margin: 0 0 7px; display: block;
+    text-decoration: none; transition: color 0.2s;
+  }
+  .pub .body a.title:hover { color: var(--accent); }
+  .pub .body .authors { font-size: 0.92rem; color: var(--ink-soft); margin: 0 0 4px; }
+  .pub .body .authors .me { color: var(--ink); font-weight: 600; }
+  .pub .body .venue { font-size: 0.88rem; color: var(--ink-faint); font-style: italic; }
+  .pub .tags { display: flex; flex-direction: column; gap: 6px; align-items: flex-end; }
+  .pub-tag {
+    font-size: 0.68rem; letter-spacing: 0.08em; text-transform: uppercase;
+    color: var(--accent); border: 1px solid color-mix(in oklab, var(--accent) 40%, var(--line));
+    padding: 3px 9px; border-radius: 100px; white-space: nowrap; font-weight: 600;
+  }
+  .pub-tag.muted { color: var(--ink-faint); border-color: var(--line); }
+  @media (max-width: 720px) { .pub { grid-template-columns: 56px 1fr; } .pub .tags { display: none; } }
+
+  /* ---------- Projects ---------- */
+  .projects-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 36px; }
+  .project { display: flex; flex-direction: column; }
+  .project image-slot { width: 100%; height: 220px; display: block; margin-bottom: 20px; border: 1px solid var(--line); }
+  .project h3 {
+    font-family: var(--heading-font); font-weight: 500; font-size: 1.4rem;
+    margin: 0 0 8px; letter-spacing: -0.01em;
+  }
+  .project .meta { font-size: 0.74rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent); font-weight: 600; margin-bottom: 10px; }
+  .project p { margin: 0 0 14px; color: var(--ink-soft); font-size: 0.98rem; }
+  .project .more { font-size: 0.85rem; font-weight: 600; color: var(--ink); text-decoration: none; border-bottom: 1.5px solid var(--accent); padding-bottom: 1px; align-self: flex-start; }
+  @media (max-width: 720px) { .projects-grid { grid-template-columns: 1fr; } }
+
+  /* ---------- Teaching ---------- */
+  .teach { display: grid; grid-template-columns: 1fr 1fr; gap: 2px; background: var(--line); border: 1px solid var(--line); }
+  .teach-item { background: var(--paper); padding: 26px 28px; display: flex; gap: 20px; align-items: baseline; }
+  .teach-item .term { font-family: var(--heading-font); color: var(--accent); font-size: 0.95rem; white-space: nowrap; min-width: 92px; }
+  .teach-item h4 { margin: 0 0 4px; font-size: 1.08rem; font-weight: 600; }
+  .teach-item p { margin: 0; font-size: 0.9rem; color: var(--ink-soft); }
+  @media (max-width: 720px) { .teach { grid-template-columns: 1fr; } }
+
+  /* ---------- Experience ---------- */
+  .exp { display: grid; grid-template-columns: 210px 1fr; gap: 28px; padding: 30px 0; border-top: 1px solid var(--line); }
+  .exp:last-child { border-bottom: 1px solid var(--line); }
+  .exp-role { font-size: 0.74rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent-text); font-weight: 600; padding-top: 7px; }
+  .exp-role .now { display: inline-block; margin-left: 4px; padding: 2px 9px; border-radius: 100px; background: var(--rose); color: #fff; letter-spacing: 0.08em; font-size: 0.66rem; vertical-align: middle; }
+  .exp-lab { font-family: var(--heading-font); font-weight: 500; font-size: 1.5rem; line-height: 1.18; letter-spacing: -0.01em; margin: 0 0 5px; }
+  .exp-inst { font-size: 0.95rem; color: var(--ink); margin: 0 0 12px; font-weight: 600; }
+  .exp-desc { margin: 0; color: var(--ink-soft); font-size: 1rem; max-width: 66ch; }
+  .exp-desc em { color: var(--ink); }
+  @media (max-width: 720px) { .exp { grid-template-columns: 1fr; gap: 8px; } .exp-role { padding-top: 0; } }
+
+  /* ---------- Skills ---------- */
+  .skills-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2px; background: var(--line); border: 1px solid var(--line); }
+  .skill-group { background: var(--surface); padding: 36px 34px; }
+  .skills-grid .skill-group:first-child { background: color-mix(in oklab, var(--accent) 16%, var(--paper)); }
+  .skills-grid .skill-group:last-child { background: color-mix(in oklab, var(--blue) 12%, var(--paper)); }
+  .skill-group h3 { font-family: var(--heading-font); font-weight: 500; font-size: 1.35rem; margin: 0 0 22px; letter-spacing: -0.01em; }
+  .chips { display: flex; flex-wrap: wrap; gap: 10px; }
+  .chip { font-size: 0.92rem; font-weight: 500; padding: 9px 17px; border-radius: 100px;
+    border: 1px solid color-mix(in oklab, var(--ink) 24%, transparent); color: var(--ink);
+    background: color-mix(in oklab, #fff 7%, var(--paper)); transition: background 0.2s, border-color 0.2s; }
+  .chip:hover { background: color-mix(in oklab, #fff 15%, var(--paper)); border-color: var(--ink-soft); }
+  @media (max-width: 720px) { .skills-grid { grid-template-columns: 1fr; } }
+
+  /* ---------- Skill list (categories) ---------- */
+  .skill-row { display: grid; grid-template-columns: 240px 1fr; gap: 28px; padding: 24px 0; border-top: 1px solid var(--line); align-items: start; }
+  .skill-row:last-child { border-bottom: 1px solid var(--line); }
+  .skill-cat { font-family: var(--heading-font); font-weight: 500; font-size: 1.22rem; color: var(--ink); padding-top: 3px; letter-spacing: -0.01em; }
+  @media (max-width: 720px) { .skill-row { grid-template-columns: 1fr; gap: 12px; } }
+
+  /* ---------- Teaching & Conferences ---------- */
+  .tc-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 56px; }
+  .tc-head { font-size: 0.74rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--accent-text); font-weight: 600; margin: 0 0 6px; padding-bottom: 16px; border-bottom: 2px solid var(--rose); }
+  .tc-item { display: grid; grid-template-columns: 104px 1fr; gap: 16px; padding: 20px 0; border-bottom: 1px solid var(--line); align-items: baseline; }
+  .tc-term { font-family: var(--heading-font); color: var(--ink-faint); font-size: 0.98rem; }
+  .tc-item h4 { margin: 0 0 3px; font-size: 1.08rem; font-weight: 600; line-height: 1.3; }
+  .tc-item p { margin: 0; font-size: 0.9rem; color: var(--ink-soft); }
+  @media (max-width: 720px) { .tc-grid { grid-template-columns: 1fr; gap: 40px; } }
+
+  /* ---------- Footer ---------- */
+  footer { border-top: 1px solid var(--line); padding: 80px 0 60px; }
+  .foot-grid { display: grid; grid-template-columns: 1.4fr 1fr; gap: 48px; align-items: end; }
+  footer h2 {
+    font-family: var(--heading-font); font-weight: 400; font-size: clamp(2rem, 4vw, 3rem);
+    line-height: 1.05; letter-spacing: -0.02em; margin: 0 0 20px;
+  }
+  footer .email { font-size: 1.15rem; color: var(--accent-text); text-decoration: none; border-bottom: 1px solid var(--accent-text); padding-bottom: 2px; }
+  .foot-links { display: flex; flex-direction: column; gap: 4px; }
+  .foot-links a { font-size: 0.95rem; color: var(--ink-soft); text-decoration: none; display: flex; justify-content: space-between; align-items: center; gap: 16px; border-bottom: 1px solid var(--line); padding: 14px 0; transition: color 0.2s; }
+  .foot-links a:hover { color: var(--ink); }
+  .foot-links a .arr { color: var(--ink-faint); }
+  .foot-base { margin-top: 56px; padding-top: 22px; border-top: 1px solid var(--line); display: flex; justify-content: space-between; font-size: 0.8rem; color: var(--ink-faint); }
+  .foot-affil { margin-top: 48px; padding-top: 28px; border-top: 1px solid var(--line); display: flex; gap: 16px; align-items: flex-start; font-size: 0.9rem; color: var(--ink-soft); line-height: 1.6; }
+  .foot-affil strong { color: var(--ink); font-weight: 600; }
+  .foot-affil-pin { width: 12px; height: 12px; border-radius: 50% 50% 50% 0; transform: rotate(-45deg); background: var(--rose); margin-top: 5px; flex-shrink: 0; }
+  @media (max-width: 720px) { .foot-grid, .hero-grid, .about-grid { grid-template-columns: 1fr; gap: 40px; } .hero-photo { order: -1; justify-self: start; } }
+
+  /* ---------- Reveal (entrance handled in JS via Web Animations API) ---------- */
+
+  #tweaks-root { position: fixed; }
+
+  /* ---------- Background imagery ---------- */
+  .bg-imagery {
+    position: fixed; inset: 0; z-index: 0;
+    pointer-events: none; overflow: hidden;
+  }
+  .bg-img {
+    position: absolute;
+    mix-blend-mode: screen;
+  }
+  .bg-cajal {
+    top: -4%; right: -8%;
+    width: 52%; max-width: 580px;
+    opacity: 0.11;
+    transform: rotate(4deg);
+    transform-origin: top right;
+  }
+  .bg-neuron {
+    bottom: -6%; left: -6%;
+    width: 38%; max-width: 420px;
+    opacity: 0.10;
+    transform: rotate(-6deg);
+    transform-origin: bottom left;
+  }
+  main, footer { position: relative; z-index: 1; }
+  .nav { z-index: 50; }
+</style>
+<template id="__bundler_thumbnail"><svg viewBox="0 0 80 56" xmlns="http://www.w3.org/2000/svg"><rect width="80" height="56" fill="#4a0214"/><text x="40" y="35" text-anchor="middle" font-family="serif" font-size="22" fill="#b3ced6" font-style="italic">KB</text></svg></template>
+<link id="gfont-Josefin-Sans" rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@300;400;500;600;700&amp;display=swap">
+</head>
+<body>
+
+  <!-- Background neuroscience imagery -->
+  <div class="bg-imagery" aria-hidden="true">
+    <img class="bg-img bg-cajal" src="uploads/a3bd9b3d-1948-44ac-846a-996da73d006f.webp" alt="" />
+    <img class="bg-img bg-neuron" src="uploads/60608ef5-0779-45fb-a297-83e80121900c.webp" alt="" />
+  </div>
+
+  <!-- ============ NAV ============ -->
+  <nav class="nav">
+    <div class="nav-inner">
+      <a href="#top" class="nav-brand">Koushani Biswas<span class="dot">.</span></a>
+      <div class="nav-links">
+        <a href="#about">About</a>
+        <a href="#research">Research</a>
+        <a href="#skills">Skills</a>
+        <a href="#teaching">Teaching</a>
+        <a href="#contact">Contact</a>
+      </div>
+    </div>
+  </nav>
+
+  <main id="top" class="wrap">
+
+    <!-- ============ HERO ============ -->
+    <section class="hero">
+      <div class="hero-grid">
+        <div class="reveal">
+          <p class="role">PhD Candidate
+/
+Neuroscience
+/
+University of Iowa</p>
+          <h1 style="font-family: &quot;Josefin Sans&quot;">Koushani<br />Biswas</h1>
+          <p class="lede">I explore how the cerebellum communicates with forebrain regions — the anterior cingulate cortex (ACC) and hippocampus (HPC) — during associative learning, using advanced electrophysiology to understand the importance of network activity driving various learning paradigms.</p>
+          <div class="hero-actions">
+            <a href="#research" class="btn btn-primary">View research →</a>
+            <a href="#contact" class="btn btn-ghost" id="cv-link">Get in touch</a>
+          </div>
+          <div class="socials">
+            <a href="https://www.linkedin.com/in/koushanibiswas/" target="_blank" rel="noopener">LinkedIn</a>
+            <a href="/cdn-cgi/l/email-protection#1972766c6a71787770347b706a6e786a596c70766e78377c7d6c"><span class="__cf_email__" data-cfemail="53383c26203b323d3a7e313a2024322013263a3c24327d363726">[email&#160;protected]</span></a>
+          </div>
+        </div>
+        <div class="hero-photo reveal">
+          <img class="headshot-img" src="uploads/IMG_3127.jpeg" alt="Koushani Biswas" />
+          <p class="photo-cap">Koushani Biswas</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ ABOUT ============ -->
+    <section id="about">
+      <p class="eyebrow reveal">About</p>
+      <p class="lead-label reveal">Curious about how the cerebellum talks to the forebrain during associative and spatial learning.</p>
+      <div class="about-themes">
+        <div class="theme-card reveal">
+          <span class="theme-num">01 / Associative Learning</span>
+          <h3 class="theme-title">Cerebellum and forebrain networks </h3>
+          <p>My research uncovers the neural underpinnings and network associations during associative learning — the process through which we form associations between stimuli and responses. Using advanced in vivo electrophysiology, I illuminate the significance of how the cerebellum, the ACC, and the HPC communicate among each other during associative learning.</p>
+        </div>
+        <div class="theme-card reveal">
+          <span class="theme-num">02 / Spatial Learning</span>
+          <h3 class="theme-title">Cerebellum, hippocampus &amp; space</h3>
+          <p>I am also uncovering how the cerebellum communicates with the hippocampus (HPC) as animals explore their environment — tracing how this cross-region dialogue shapes <strong>spatial learning</strong> and the formation of the brain's internal maps of space.</p>
+        </div>
+      </div>
+      <div class="about-meta reveal">
+        <div><div class="k">Focus</div><div class="v">Associative &amp; Spatial Learning</div></div>
+        <div><div class="k">Methods</div><div class="v">Electrophysiology · Behavior</div></div>
+        <div><div class="k">Lab</div><div class="v">Neuroscience of Learning Lab</div></div>
+        <div><div class="k">Based in</div><div class="v">University of Iowa, USA</div></div>
+      </div>
+    </section>
+
+    <!-- ============ RESEARCH EXPERIENCES ============ -->
+    <section id="research">
+      <p class="eyebrow reveal">Research Experiences</p>
+      <h2 class="section-title reveal" style="margin-bottom:30px;">Where I've worked.</h2>
+      <div class="reveal">
+
+        <div class="exp">
+          <div class="exp-role">PHD CANDIDATE CURRENT</div>
+          <div class="exp-body">
+            <h3 class="exp-lab">Neuroscience of Learning Lab</h3>
+            <p class="exp-inst">University of Iowa, USA</p>
+            <p class="exp-desc">Understanding the network interactions among the anterior cingulate cortex (ACC), the hippocampus (HPC) and the cerebellum in associative learning.</p>
+          </div>
+        </div>
+
+        <div class="exp">
+          <div class="exp-role">MS Student</div>
+          <div class="exp-body">
+            <h3 class="exp-lab">Laboratory of Neural Circuits and Behavior</h3>
+            <p class="exp-inst">National Institute of Science Education and Research, India</p>
+            <p class="exp-desc">Understanding the role of the Alpha-melanocyte stimulating hormone (α-MSH) containing system in the brain of <em>Taeniopygia guttata</em>: relevance to the regulation of energy balance.</p>
+          </div>
+        </div>
+
+        <div class="exp">
+          <div class="exp-role">Summer Intern</div>
+          <div class="exp-body">
+            <h3 class="exp-lab">Olfactory Memory Research Group</h3>
+            <p class="exp-inst">Max Planck Institute of Neurobiology, Germany</p>
+            <p class="exp-desc">Investigating how zebrafish larvae perceive odor stimuli by analysing their movement using DeepLabCut.</p>
+          </div>
+        </div>
+
+        <div class="exp">
+          <div class="exp-role">Project Intern</div>
+          <div class="exp-body">
+            <h3 class="exp-lab">Neuromatch Academy — Interactive Track Project</h3>
+            <p class="exp-inst">Computational Neuroscience</p>
+            <p class="exp-desc">Development of a sleep assistance system by personalized brain-state targeting using reinforcement learning (RL).</p>
+          </div>
+        </div>
+
+        <div class="exp">
+          <div class="exp-role">Summer Intern</div>
+          <div class="exp-body">
+            <h3 class="exp-lab">Neurodynamics Laboratory</h3>
+            <p class="exp-inst">Indian Institute of Science, India</p>
+            <p class="exp-desc">Flavor-dependent retention of remote food preference memory.</p>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ============ SKILLS ============ -->
+    <section id="skills">
+      <p class="eyebrow reveal">Skills</p>
+      <h2 class="section-title reveal" style="margin-bottom:36px;">Tools of the trade.</h2>
+      <div class="skill-list reveal">
+        <div class="skill-row">
+          <div class="skill-cat">Neuroscience</div>
+          <div class="chips">
+            <span class="chip">Trace eyeblink conditioning</span>
+            <span class="chip">Fear conditioning</span>
+            <span class="chip">Spatial navigation tasks</span>
+            <span class="chip">In - vivo Electrophysiology</span>
+          </div>
+        </div>
+        <div class="skill-row">
+          <div class="skill-cat">Cell Biology &amp; Biochemistry</div>
+          <div class="chips">
+            <span class="chip">Cell culture</span>
+            <span class="chip">ELISA</span>
+            <span class="chip">Western blotting</span>
+            <span class="chip">Immunohistochemistry</span>
+          </div>
+        </div>
+        <div class="skill-row">
+          <div class="skill-cat">Microscopy</div>
+          <div class="chips">
+            <span class="chip">Confocal microscopy</span>
+            <span class="chip">Fluorescence microscopy</span>
+          </div>
+        </div>
+        <div class="skill-row">
+          <div class="skill-cat">Molecular Biology</div>
+          <div class="chips">
+            <span class="chip">cDNA cloning</span>
+            <span class="chip">PCR</span>
+            <span class="chip">RT/qPCR</span>
+          </div>
+        </div>
+        <div class="skill-row">
+          <div class="skill-cat">Programming</div>
+          <div class="chips">
+            <span class="chip">Python</span>
+            <span class="chip">MATLAB</span>
+            <span class="chip">R</span>
+            <span class="chip">SPSS</span>
+            <span class="chip">C++</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ TEACHING & CONFERENCES ============ -->
+    <section id="teaching">
+      <p class="eyebrow reveal">Teaching &amp; Conferences</p>
+      <h2 class="section-title reveal" style="margin-bottom:40px;">In the classroom &amp; at the podium.</h2>
+      <div class="tc-grid reveal">
+        <div>
+          <h3 class="tc-head">Teaching Experience</h3>
+          <div class="tc-item">
+            <span class="tc-term">Spring 2026</span>
+            <div><h4>Elementary Psychology</h4><p>Graduate Teaching Assistant</p></div>
+          </div>
+          <div class="tc-item">
+            <span class="tc-term">Fall 2025</span>
+            <div><h4>Elementary Psychology</h4><p>Graduate Teaching Assistant</p></div>
+          </div>
+          <div class="tc-item">
+            <span class="tc-term">Spring 2025</span>
+            <div><h4>Psychosis Spectrum</h4><p>Graduate Teaching Assistant</p></div>
+          </div>
+          <div class="tc-item">
+            <span class="tc-term">Fall 2024</span>
+            <div><h4>Neuroscience of Learning and Memory</h4><p>Graduate Teaching Assistant</p></div>
+          </div>
+          <div class="tc-item">
+            <span class="tc-term">Spring 2024</span>
+            <div><h4>Introduction to Behavioral Neuroscience</h4><p>Graduate Teaching Assistant</p></div>
+          </div>
+          <div class="tc-item">
+            <span class="tc-term">Fall 2023</span>
+            <div><h4>Introduction to Behavioral Neuroscience</h4><p>Graduate Teaching Assistant</p></div>
+          </div>
+        </div>
+        <div>
+          <h3 class="tc-head">Mentoring</h3>
+          <div class="tc-item">
+            <span class="tc-term">2023 — Now</span>
+            <div><h4>Undergraduate Research Assistants</h4><p>Mentoring students in electrophysiology &amp; behavioral neuroscience</p></div>
+          </div>
+          <h3 class="tc-head" style="margin-top:38px;">Conferences &amp; Posters</h3>
+          <div class="tc-item">
+            <span class="tc-term">Oct 2024</span>
+            <div><h4>Society for Neuroscience</h4><p>Poster Presenter</p></div>
+          </div>
+          <div class="tc-item">
+            <span class="tc-term">Nov 2020</span>
+            <div><h4>Neuromatch Conference 3.0</h4><p>Poster Presenter</p></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ============ FOOTER ============ -->
+  <footer id="contact">
+    <div class="wrap">
+      <div class="foot-grid">
+        <div class="reveal">
+          <p class="eyebrow">Get in touch</p>
+          <h2>Let's talk about<br />brains, circuits &amp; learning.</h2>
+          <a href="/cdn-cgi/l/email-protection#1e75716b6d767f7077337c776d697f6d5e6b7771697f307b7a6b" class="email"><span class="__cf_email__" data-cfemail="d2b9bda7a1bab3bcbbffb0bba1a5b3a192a7bbbda5b3fcb7b6a7">[email&#160;protected]</span></a>
+        </div>
+        <div class="foot-links reveal">
+          <a href="https://www.linkedin.com/in/koushanibiswas/" target="_blank" rel="noopener"><span>LinkedIn</span><span class="arr">↗</span></a>
+          <a href="/cdn-cgi/l/email-protection#2d4642585e454c4344004f445e5a4c5e6d5844425a4c03484958"><span>Email</span><span class="arr">↗</span></a>
+        </div>
+      </div>
+      <div class="foot-affil reveal">
+        <div class="foot-affil-pin" aria-hidden="true"></div>
+        <div>
+          <strong>Neuroscience of Learning Lab</strong><br />
+          Department of Psychological and Brain Sciences · Iowa Neuroscience Institute<br />
+          University of Iowa, USA
+        </div>
+      </div>
+      <div class="foot-base">
+        <span>© 2026 Koushani Biswas</span>
+        <span>PhD Student · Neuroscience · University of Iowa</span>
+      </div>
+    </div>
+  </footer>
+
+  <div id="tweaks-root"></div>
+
+  <!-- ============ SCRIPTS ============ -->
+  <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script src="image-slot.js"></script>
+  <script>
+    // Scroll reveal via Web Animations API — content is always visible in the DOM;
+    // we only play a one-shot rise on first view. If anything fails, content stays put.
+    const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const playRise = (el) => {
+      if (prefersReduced || el.dataset.rose) return;
+      el.dataset.rose = '1';
+      try {
+        el.animate([
+          { opacity: 0, transform: 'translateY(18px)' },
+          { opacity: 1, transform: 'none' }
+        ], { duration: 650, easing: 'cubic-bezier(.2,.7,.3,1)', fill: 'backwards' });
+      } catch (e) { /* no-op */ }
+    };
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach((e) => { if (e.isIntersecting) { playRise(e.target); io.unobserve(e.target); } });
+    }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
+    document.querySelectorAll('.reveal').forEach((el) => io.observe(el));
+
+    // Active nav link
+    const navLinks = [...document.querySelectorAll('.nav-links a')];
+    const sections = navLinks.map((a) => document.querySelector(a.getAttribute('href'))).filter(Boolean);
+    const navIo = new IntersectionObserver((entries) => {
+      entries.forEach((e) => {
+        if (e.isIntersecting) {
+          const id = '#' + e.target.id;
+          navLinks.forEach((a) => a.classList.toggle('active', a.getAttribute('href') === id));
+        }
+      });
+    }, { rootMargin: '-45% 0px -50% 0px' });
+    sections.forEach((s) => navIo.observe(s));
+  </script>
+
+  <script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+  <script type="text/babel" src="tweaks-panel.jsx"></script>
+  <script type="text/babel">
+    const TWEAK_DEFAULTS = /*EDITMODE-BEGIN*/{
+      "accent": "#ae5264",
+      "paper": "#4a0214",
+      "headingFont": "Spectral"
+    }/*EDITMODE-END*/;
+
+    function App() {
+      const [t, setTweak] = useTweaks(TWEAK_DEFAULTS);
+      React.useEffect(() => {
+        const r = document.documentElement.style;
+        const hex = (t.paper || '').replace('#', '');
+        const cr = parseInt(hex.substr(0, 2), 16), cg = parseInt(hex.substr(2, 2), 16), cb = parseInt(hex.substr(4, 2), 16);
+        const lum = (0.299 * cr + 0.587 * cg + 0.114 * cb) / 255;
+        const dark = lum < 0.5;
+        r.setProperty('--accent', t.accent);
+        r.setProperty('--paper', t.paper);
+        r.setProperty('--ink', dark ? '#b3ced6' : '#2c2a23');
+        r.setProperty('--ink-soft', dark ? '#93acb3' : '#645e51');
+        r.setProperty('--ink-faint', dark ? '#6f868d' : '#948d7c');
+        r.setProperty('--surface', dark ? 'color-mix(in oklab, #fff 8%, ' + t.paper + ')' : '#eae7c6');
+        r.setProperty('--line', dark ? 'rgba(179,206,214,0.16)' : '#dcd7c2');
+        const fam = t.headingFont === 'Public Sans'
+          ? "'Public Sans', system-ui, sans-serif"
+          : `'${t.headingFont}', Georgia, serif`;
+        r.setProperty('--heading-font', fam);
+      }, [t]);
+
+      return (
+        <TweaksPanel>
+          <TweakSection label="Accent" />
+          <TweakColor label="Accent color" value={t.accent}
+            options={['#ae5264', '#b3ced6', '#5d7142', '#9e5060', '#c9a24a']}
+            onChange={(v) => setTweak('accent', v)} />
+          <TweakSection label="Paper" />
+          <TweakColor label="Background tone" value={t.paper}
+            options={['#4a0214', '#64242f', '#2a3a40', '#f3f1e4', '#eae7c6']}
+            onChange={(v) => setTweak('paper', v)} />
+          <TweakSection label="Type" />
+          <TweakSelect label="Heading font" value={t.headingFont}
+            options={['Newsreader', 'Spectral', 'Public Sans']}
+            onChange={(v) => setTweak('headingFont', v)} />
+        </TweaksPanel>
+      );
+    }
+
+    ReactDOM.createRoot(document.getElementById('tweaks-root')).render(<App />);
+  </script>
+</body>
+</html>
