@@ -68,6 +68,12 @@
     font-family: var(--heading-font);
     font-size: 1.15rem; font-weight: 500; letter-spacing: -0.01em;
     text-decoration: none; white-space: nowrap;
+    display: inline-flex; align-items: center; gap: 10px;
+  }
+  .nav-avatar {
+    width: 34px; height: 34px; border-radius: 50%;
+    object-fit: cover; background: var(--blue);
+    border: 1.5px solid var(--line); flex-shrink: 0;
   }
   .nav-brand .dot { color: var(--accent-text); }
   .nav-links { display: flex; gap: 28px; align-items: baseline; }
@@ -144,6 +150,11 @@
     font-size: clamp(2.8rem, 6vw, 4.6rem); line-height: 1.02;
     letter-spacing: -0.025em; margin: 0 0 18px;
   }
+  .hero h1 .name-link {
+    color: inherit; text-decoration: none;
+    transition: color 0.2s; cursor: pointer;
+  }
+  .hero h1 .name-link:hover { color: var(--accent-text); }
   .hero .role {
     font-size: 1.05rem; color: var(--accent-text); font-weight: 600;
     letter-spacing: 0.01em; margin: 0 0 24px;
@@ -279,7 +290,11 @@
   .exp-role { font-size: 0.74rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent-text); font-weight: 600; padding-top: 7px; }
   .exp-role .now { display: inline-block; margin-left: 4px; padding: 2px 9px; border-radius: 100px; background: var(--rose); color: #fff; letter-spacing: 0.08em; font-size: 0.66rem; vertical-align: middle; }
   .exp-lab { font-family: var(--heading-font); font-weight: 500; font-size: 1.5rem; line-height: 1.18; letter-spacing: -0.01em; margin: 0 0 5px; }
+  .exp-lab a { color: inherit; text-decoration: none; border-bottom: 1px solid var(--line); transition: border-color 0.2s, color 0.2s; }
+  .exp-lab a:hover { color: var(--accent-text); border-bottom-color: var(--accent-text); }
   .exp-inst { font-size: 0.95rem; color: var(--ink); margin: 0 0 12px; font-weight: 600; }
+  .exp-inst a { color: var(--accent-text); text-decoration: none; border-bottom: 1px solid var(--line); transition: border-color 0.2s; }
+  .exp-inst a:hover { border-bottom-color: var(--accent-text); }
   .exp-desc { margin: 0; color: var(--ink-soft); font-size: 1rem; max-width: 66ch; }
   .exp-desc em { color: var(--ink); }
   @media (max-width: 720px) { .exp { grid-template-columns: 1fr; gap: 8px; } .exp-role { padding-top: 0; } }
@@ -372,7 +387,7 @@
   <!-- ============ NAV ============ -->
   <nav class="nav">
     <div class="nav-inner">
-      <a href="#top" class="nav-brand">Koushani Biswas<span class="dot">.</span></a>
+      <a href="#top" class="nav-brand"><img class="nav-avatar" src="uploads/Untitled design.png" alt="" /><span style="color:#f3c6df">Koushani Biswas</span><span class="dot">.</span></a>
       <div class="nav-links">
         <a href="#about">About</a>
         <a href="#research">Research</a>
@@ -407,7 +422,7 @@
 Neuroscience
 /
 University of Iowa</p>
-          <h1 style="font-family: &quot;Josefin Sans&quot;">Koushani<br />Biswas</h1>
+          <h1 style="font-family: &quot;Josefin Sans&quot;"><a href="https://psychology.uiowa.edu/people/koushani-biswas" target="_blank" rel="noopener" class="name-link">Koushani<br />Biswas</a></h1>
           <p class="lede">I explore how the cerebellum communicates with forebrain regions — the anterior cingulate cortex (ACC) and hippocampus (HPC) — during associative learning, using multi-site in-vivo electrophysiology to understand the importance of network activity driving these various learning paradigms.</p>
           <div class="hero-actions">
             <a href="#research" class="btn btn-primary">View research →</a>
@@ -415,7 +430,9 @@ University of Iowa</p>
           </div>
           <div class="socials">
             <a href="https://www.linkedin.com/in/koushanibiswas/" target="_blank" rel="noopener">LinkedIn</a>
-            <a href="/cdn-cgi/l/email-protection#d4bfbba1a7bcb5babdf2f7e0e1efb6bda7a3b5a7f2f7e2e0efa1bdbba3b5f2f7e0e2efb1b0a1">koushani&#45;biswas&#64;uiowa&#46;edu</a>
+            <a href="https://github.com/Koushani-B" target="_blank" rel="noopener">GitHub</a>
+            <a href="https://orcid.org/0009-0004-2115-0224" target="_blank" rel="noopener">ORCID</a>
+            <a href="/cdn-cgi/l/email-protection#2a41455f59424b44430c091e1f114843595d4b590c091c1e115f43455d4b0c091e1c114f4e5f">koushani&#45;biswas&#64;uiowa&#46;edu</a>
           </div>
         </div>
         <div class="hero-photo reveal">
@@ -458,8 +475,9 @@ University of Iowa</p>
         <div class="exp">
           <div class="exp-role">PHD CANDIDATE<span class="now">Current</span></div>
           <div class="exp-body">
-            <h3 class="exp-lab">Neuroscience of Learning Lab</h3>
-            <p class="exp-inst">University of Iowa, USA</p>
+            <h3 class="exp-lab"><a href="https://freeman.lab.uiowa.edu/research" target="_blank" rel="noopener">Neuroscience of Learning Lab</a></h3>
+            <p class="exp-inst" style="margin-bottom:2px;">University of Iowa, USA</p>
+            <p class="exp-inst" style="font-weight:500;color:var(--ink-soft);">PI: <a href="https://scholar.google.com/citations?user=MhtY9VYAAAAJ&amp;hl=en" target="_blank" rel="noopener">Dr. John H. Freeman</a></p>
             <p class="exp-desc">Understanding the network interactions among the anterior cingulate cortex (ACC), the hippocampus (HPC) and the cerebellum in associative learning.</p>
           </div>
         </div>
@@ -616,11 +634,13 @@ University of Iowa</p>
         <div class="reveal">
           <p class="eyebrow">Get in touch</p>
           <h2>Let's talk about<br />brains, circuits &amp; learning.</h2>
-          <a href="/cdn-cgi/l/email-protection#365d5943455e57585f101502030d545f45415745101500020d435f594157101502000d535243" class="email">koushani&#45;biswas&#64;uiowa&#46;edu</a>
+          <a href="/cdn-cgi/l/email-protection#741f1b01071c151a1d525740414f161d07031507525742404f011d1b0315525740424f111001" class="email">koushani&#45;biswas&#64;uiowa&#46;edu</a>
         </div>
         <div class="foot-links reveal">
           <a href="https://www.linkedin.com/in/koushanibiswas/" target="_blank" rel="noopener"><span>LinkedIn</span><span class="arr">↗</span></a>
-          <a href="/cdn-cgi/l/email-protection#650e0a10160d040b0c434651505e070c16120416434653515e100c0a1204434651535e000110"><span>Email</span><span class="arr">↗</span></a>
+          <a href="https://github.com/Koushani-B" target="_blank" rel="noopener"><span>GitHub</span><span class="arr">↗</span></a>
+          <a href="https://orcid.org/0009-0004-2115-0224" target="_blank" rel="noopener"><span>ORCID</span><span class="arr">↗</span></a>
+          <a href="/cdn-cgi/l/email-protection#0863677d7b606966612e2b3c3d336a617b7f697b2e2b3e3c337d61677f692e2b3c3e336d6c7d"><span>Email</span><span class="arr">↗</span></a>
         </div>
       </div>
       <div class="foot-affil reveal">
