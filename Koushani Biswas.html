@@ -74,7 +74,37 @@
   }
   .nav-links a:hover, .nav-links a.active { color: var(--ink); }
   .nav-links a.active::after, .nav-links a:hover::after { width: 100%; }
-  @media (max-width: 820px) { .nav-links { display: none; } }
+  .nav-burger {
+    display: none; background: none; border: none; cursor: pointer;
+    padding: 6px; color: var(--ink); flex-direction: column; gap: 5px;
+  }
+  .nav-burger span {
+    display: block; width: 22px; height: 1.5px;
+    background: var(--ink); transition: all 0.25s;
+  }
+  .nav-mobile {
+    display: none; position: fixed; inset: 0; z-index: 49;
+    background: color-mix(in oklab, var(--paper) 97%, transparent);
+    backdrop-filter: blur(12px);
+    flex-direction: column; align-items: center; justify-content: center;
+    gap: 36px;
+  }
+  .nav-mobile.open { display: flex; }
+  .nav-mobile a {
+    font-size: 1.5rem; font-family: var(--heading-font); font-weight: 400;
+    color: var(--ink); text-decoration: none; letter-spacing: -0.01em;
+    transition: color 0.2s;
+  }
+  .nav-mobile a:hover { color: var(--accent-text); }
+  .nav-mobile .close-btn {
+    position: absolute; top: 20px; right: 24px;
+    font-size: 1.6rem; background: none; border: none;
+    color: var(--ink-soft); cursor: pointer; line-height: 1;
+  }
+  @media (max-width: 820px) {
+    .nav-links { display: none; }
+    .nav-burger { display: flex; }
+  }
 
   /* ---------- Section primitives ---------- */
   section { padding: 92px 0; border-top: 1px solid var(--line); }
@@ -287,7 +317,14 @@
   .foot-affil { margin-top: 48px; padding-top: 28px; border-top: 1px solid var(--line); display: flex; gap: 16px; align-items: flex-start; font-size: 0.9rem; color: var(--ink-soft); line-height: 1.6; }
   .foot-affil strong { color: var(--ink); font-weight: 600; }
   .foot-affil-pin { width: 12px; height: 12px; border-radius: 50% 50% 50% 0; transform: rotate(-45deg); background: var(--rose); margin-top: 5px; flex-shrink: 0; }
-  @media (max-width: 720px) { .foot-grid, .hero-grid, .about-grid { grid-template-columns: 1fr; gap: 40px; } .hero-photo { order: -1; justify-self: start; } }
+  @media (max-width: 720px) {
+    .foot-grid, .hero-grid, .about-grid { grid-template-columns: 1fr; gap: 40px; }
+    .hero-photo { order: -1; justify-self: start; }
+    .headshot-img { width: 100% !important; height: 260px !important; }
+    .wrap { padding: 0 20px; }
+    .nav-inner { padding: 14px 20px; }
+    section { padding: 60px 0; }
+  }
 
   /* ---------- Reveal (entrance handled in JS via Web Animations API) ---------- */
 
@@ -341,8 +378,21 @@
         <a href="#teaching">Teaching</a>
         <a href="#contact">Contact</a>
       </div>
+      <button class="nav-burger" id="nav-burger" aria-label="Open menu">
+        <span></span><span></span><span></span>
+      </button>
     </div>
   </nav>
+
+  <!-- Mobile nav overlay -->
+  <div class="nav-mobile" id="nav-mobile">
+    <button class="close-btn" id="nav-close" aria-label="Close menu">&times;</button>
+    <a href="#about" class="nav-mobile-link">About</a>
+    <a href="#research" class="nav-mobile-link">Research</a>
+    <a href="#skills" class="nav-mobile-link">Skills</a>
+    <a href="#teaching" class="nav-mobile-link">Teaching</a>
+    <a href="#contact" class="nav-mobile-link">Contact</a>
+  </div>
 
   <main id="top" class="wrap">
 
@@ -363,7 +413,7 @@ University of Iowa</p>
           </div>
           <div class="socials">
             <a href="https://www.linkedin.com/in/koushanibiswas/" target="_blank" rel="noopener">LinkedIn</a>
-            <a href="/cdn-cgi/l/email-protection#b8d3d7cdcbd0d9d6d19e9b8c8d83dad1cbcfd9cb9e9b8e8c83cdd1d7cfd99e9b8c8e83dddccd">koushani&#45;biswas&#64;uiowa&#46;edu</a>
+            <a href="/cdn-cgi/l/email-protection#c0abafb5b3a8a1aea9e6e3f4f5fba2a9b3b7a1b3e6e3f6f4fbb5a9afb7a1e6e3f4f6fba5a4b5">koushani&#45;biswas&#64;uiowa&#46;edu</a>
           </div>
         </div>
         <div class="hero-photo reveal">
@@ -562,11 +612,11 @@ University of Iowa</p>
         <div class="reveal">
           <p class="eyebrow">Get in touch</p>
           <h2>Let's talk about<br />brains, circuits &amp; learning.</h2>
-          <a href="/cdn-cgi/l/email-protection#177c7862647f76797e313423222c757e64607664313421232c627e786076313423212c727362" class="email">koushani&#45;biswas&#64;uiowa&#46;edu</a>
+          <a href="/cdn-cgi/l/email-protection#f992968c8a91989790dfdacdccc29b908a8e988adfdacfcdc28c90968e98dfdacdcfc29c9d8c" class="email">koushani&#45;biswas&#64;uiowa&#46;edu</a>
         </div>
         <div class="foot-links reveal">
           <a href="https://www.linkedin.com/in/koushanibiswas/" target="_blank" rel="noopener"><span>LinkedIn</span><span class="arr">↗</span></a>
-          <a href="/cdn-cgi/l/email-protection#c4afabb1b7aca5aaade2e7f0f1ffa6adb7b3a5b7e2e7f2f0ffb1adabb3a5e2e7f0f2ffa1a0b1"><span>Email</span><span class="arr">↗</span></a>
+          <a href="/cdn-cgi/l/email-protection#72191d07011a131c1b5451464749101b010513015451444649071b1d05135451464449171607"><span>Email</span><span class="arr">↗</span></a>
         </div>
       </div>
       <div class="foot-affil reveal">
@@ -619,6 +669,16 @@ University of Iowa</p>
       });
     }, { rootMargin: '-45% 0px -50% 0px' });
     sections.forEach((s) => navIo.observe(s));
+
+    // Hamburger menu
+    const burger = document.getElementById('nav-burger');
+    const mobileNav = document.getElementById('nav-mobile');
+    const closeBtn = document.getElementById('nav-close');
+    burger.addEventListener('click', () => mobileNav.classList.add('open'));
+    closeBtn.addEventListener('click', () => mobileNav.classList.remove('open'));
+    document.querySelectorAll('.nav-mobile-link').forEach((a) => {
+      a.addEventListener('click', () => mobileNav.classList.remove('open'));
+    });
   </script>
 
   <script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
